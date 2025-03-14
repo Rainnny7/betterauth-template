@@ -1,0 +1,46 @@
+import { createEnv } from "@t3-oss/env-nextjs";
+import { z } from "zod";
+
+export const env = createEnv({
+    server: {
+        NODE_ENV: z.enum(["development", "test", "production"]),
+
+        // Drizzle
+        DRIZZLE_DATABASE_URL: z.string(),
+
+        // BetterAuth
+        BETTER_AUTH_SECRET: z.string(),
+    },
+
+    client: {
+        // App
+        NEXT_PUBLIC_BASE_URL: z.string(),
+    },
+
+    runtimeEnv: {
+        NODE_ENV: process.env.NODE_ENV,
+
+        // App
+        NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+
+        // Drizzle
+        DRIZZLE_DATABASE_URL: process.env.DRIZZLE_DATABASE_URL,
+
+        // BetterAuth
+        BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+    },
+
+    /**
+     * i had a stupid fucking error so now this is forever going to be turned on (:
+     * @theo fix ur shit lib
+     */
+    skipValidation: true,
+
+    /**
+     * Makes it so that empty strings are treated as undefined.
+     * `SOME_VAR: z.string()` and `SOME_VAR=''` will throw an error.
+     */
+    emptyStringAsUndefined: true,
+});
+
+export const isProd = env.NODE_ENV === "production";
