@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ReactNode } from "react";
-import Navbar from "~/components/navbar";
 import { ThemeProvider } from "~/components/theme-provider";
+import Toolbar from "~/components/toolbar";
 import "../styles/globals.css";
 
 const geistSans = Geist({
@@ -31,11 +31,21 @@ const RootLayout = ({
 }>) => (
     <html lang="en" suppressHydrationWarning>
         <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth select-none`}
         >
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-                <Navbar />
-                {children}
+                <div
+                    className="px-5"
+                    style={{
+                        background:
+                            "linear-gradient(to top, hsla(240, 6%, 10%, 0.45), var(--background))",
+                    }}
+                >
+                    <div className="min-h-screen mx-auto max-w-screen-2xl flex flex-col justify-center items-center">
+                        {children}
+                    </div>
+                    <Toolbar />
+                </div>
             </ThemeProvider>
         </body>
     </html>
