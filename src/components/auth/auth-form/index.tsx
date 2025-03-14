@@ -211,6 +211,7 @@ const LegalLink = ({
     <Link
         className="hover:text-primary transition-colors transform-gpu"
         href={href}
+        target="_blank"
         draggable={false}
     >
         {children}

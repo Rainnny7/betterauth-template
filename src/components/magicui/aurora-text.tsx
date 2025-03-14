@@ -21,11 +21,18 @@ export function AuroraText({
     const containerRef = useRef<HTMLSpanElement>(null);
     const [fontSize, setFontSize] = React.useState(0);
     const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 });
-    const [isReady, setIsReady] = React.useState(false);
+    const [isCanvasReady, setIsCanvasReady] = React.useState(false);
+    const [isMounted, setIsMounted] = React.useState(false);
     const [textStyle, setTextStyle] = React.useState<
         Partial<CSSStyleDeclaration>
     >({});
     const maskId = useId();
+
+    // Add mounted state
+    useEffect(() => {
+        setIsMounted(true);
+        return () => setIsMounted(false);
+    }, []);
 
     // Updated effect to compute all text styles from parent
     useEffect(() => {
@@ -82,7 +89,7 @@ export function AuroraText({
                     width: bbox.width,
                     height: bbox.height,
                 });
-                setIsReady(true);
+                setIsCanvasReady(true);
             }
         };
 
@@ -149,10 +156,12 @@ export function AuroraText({
     return (
         <span
             ref={containerRef}
-            className={`relative inline-block align-middle ${className}`}
+            className={`relative inline-block align-middle overflow-hidden ${className}`}
             style={{
                 width: dimensions.width || "auto",
                 height: dimensions.height || "auto",
+                opacity: isMounted ? 1 : 0, // Hide everything until mounted
+                transition: "opacity 0.4s ease-in", // Smoother transition
             }}
         >
             {/* Hidden text for SEO */}
@@ -161,9 +170,9 @@ export function AuroraText({
             {/* Visual placeholder while canvas loads */}
             <span
                 style={{
-                    opacity: isReady ? 0 : 1,
-                    transition: "opacity 0.2s ease-in",
-                    position: isReady ? "absolute" : "relative",
+                    opacity: isCanvasReady ? 0 : 1,
+                    transition: "opacity 0.4s ease-in",
+                    position: isCanvasReady ? "absolute" : "relative",
                     display: "inline-block",
                     whiteSpace: "nowrap",
                 }}
@@ -175,8 +184,8 @@ export function AuroraText({
             <div
                 className="absolute inset-0"
                 style={{
-                    opacity: isReady ? 1 : 0,
-                    transition: "opacity 0.2s ease-in",
+                    opacity: isCanvasReady ? 1 : 0,
+                    transition: "opacity 0.4s ease-in",
                 }}
                 aria-hidden="true"
             >
@@ -206,8 +215,11 @@ export function AuroraText({
                     style={{
                         clipPath: `url(#${maskId})`,
                         WebkitClipPath: `url(#${maskId})`,
+                        opacity: isCanvasReady ? 1 : 0,
+                        transition: "opacity 0.4s ease-in",
                     }}
                     className="h-full w-full"
+                    onLoad={() => setIsCanvasReady(true)}
                 />
             </div>
         </span>
