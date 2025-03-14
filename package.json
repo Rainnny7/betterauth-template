@@ -12,12 +12,14 @@
         "prettier": "bunx prettier -w --config ./prettierrc.json ."
     },
     "dependencies": {
+        "@marsidev/react-turnstile": "^1.1.0",
         "@radix-ui/react-dialog": "^1.1.6",
         "@radix-ui/react-label": "^2.1.2",
         "@radix-ui/react-separator": "^1.1.2",
         "@radix-ui/react-slot": "^1.1.2",
         "@radix-ui/react-tooltip": "^1.1.8",
         "@t3-oss/env-nextjs": "^0.12.0",
+        "axios": "^1.8.3",
         "babel-plugin-react-compiler": "^19.0.0-beta-bafa41b-20250307",
         "better-auth": "^1.2.4",
         "class-variance-authority": "^0.7.1",

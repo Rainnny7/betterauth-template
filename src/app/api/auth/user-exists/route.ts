@@ -4,6 +4,10 @@ import { db } from "~/lib/database";
 import { users } from "~/lib/database/schemas/auth-schema";
 import { isValidEmail } from "~/lib/utils";
 
+export type UserExistsResponse = {
+    exists: boolean;
+};
+
 /**
  * A POST request that checks if a user exists in the database
  * with the input as either an email or username.

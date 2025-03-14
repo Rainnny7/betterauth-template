@@ -16,6 +16,8 @@ import { Separator } from "~/components/ui/separator";
 import { env, isProd } from "~/lib/env";
 import { cn } from "~/lib/utils";
 
+export type AuthFormType = "auto" | "login" | "register";
+
 type AuthFormProps = {
     /**
      * The optional class name to apply to the form.
@@ -35,7 +37,7 @@ type AuthFormProps = {
      * register - The form will only be for registering.
      * </p>
      */
-    type?: "auto" | "login" | "register";
+    type?: AuthFormType;
 
     /**
      * The link to the logo to display in the form.
@@ -61,13 +63,14 @@ type AuthFormProps = {
 const AuthForm = ({
     className,
     authOptions,
-    type = "auto",
+    type: initialType = "auto",
     logo = "/logo.png",
     title,
     termsAndConditions,
     privacyPolicy,
 }: AuthFormProps): ReactElement => {
     const router: AppRouterInstance = useRouter();
+    const [type, setType] = useState<AuthFormType>(initialType);
     const [error, setError] = useState<string | undefined>(undefined);
 
     // Obtain the title from the form type if needed
@@ -128,7 +131,10 @@ const AuthForm = ({
                         {type === "register" ? (
                             <RegistrationForm />
                         ) : (
-                            <LoginForm />
+                            <LoginForm
+                                setType={setType}
+                                setError={setError}
+                            />
                         )}
                     </>
                 )}

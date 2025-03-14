@@ -12,12 +12,18 @@ export const env = createEnv({
         BETTER_AUTH_SECRET: z.string(),
         DISCORD_CLIENT_ID: z.string(),
         DISCORD_CLIENT_SECRET: z.string(),
+
+        // Cloudflare Turnstile
+        TURNSTILE_SECRET_KEY: z.string(),
     },
 
     client: {
         // App
         NEXT_PUBLIC_BASE_URL: z.string(),
         NEXT_PUBLIC_APP_NAME: z.string(),
+
+        // Cloudflare Turnstile
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string(),
     },
 
     runtimeEnv: {
@@ -26,6 +32,7 @@ export const env = createEnv({
         // App
         NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
         NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
+
         // Drizzle
         DRIZZLE_DATABASE_URL: process.env.DRIZZLE_DATABASE_URL,
 
@@ -33,6 +40,11 @@ export const env = createEnv({
         BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
         DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
         DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
+
+        // Cloudflare Turnstile
+        TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY:
+            process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
     },
 
     /**

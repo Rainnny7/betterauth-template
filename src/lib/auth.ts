@@ -1,8 +1,9 @@
 import { betterAuth, BetterAuthOptions } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { username } from "better-auth/plugins";
+import { captcha, username } from "better-auth/plugins";
 import { db } from "~/lib/database";
 import { env } from "~/lib/env";
+
 import * as schema from "./database/schemas/auth-schema";
 
 export const auth = betterAuth({
@@ -21,11 +22,18 @@ export const auth = betterAuth({
         discord: {
             id: "discord",
             name: "Discord",
-            clientId: env.DISCORD_CLIENT_ID as string,
-            clientSecret: env.DISCORD_CLIENT_SECRET as string,
+            clientId: env.DISCORD_CLIENT_ID,
+            clientSecret: env.DISCORD_CLIENT_SECRET,
         },
     },
-    plugins: [username()],
+    plugins: [
+        username(),
+        captcha({
+            provider: "cloudflare-turnstile",
+            secretKey: env.TURNSTILE_SECRET_KEY,
+            endpoints: ["/auth"],
+        }),
+    ],
 });
 
 export const toClientAuthOptions = (authOptions: BetterAuthOptions) => {
