@@ -8,7 +8,7 @@ This template serves as a simple base with a basic dashboard, as well as premade
 
 ## Preview
 Wanna see a live preview? See it [here](https://ba-demo.rainnny.club)!
-![Live Preview](https://preview.fascinated.cc/https://google.ca)
+![Live Preview](https://preview.fascinated.cc/?url=https://google.ca)
 
 ## Stack
 -   TypeScript

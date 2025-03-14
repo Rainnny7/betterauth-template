@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ReactNode } from "react";
+import { ThemeProvider } from "~/components/components/theme-provider";
 import "../styles/globals.css";
 
 const geistSans = Geist({
@@ -24,11 +25,13 @@ const RootLayout = ({
 }: Readonly<{
     children: ReactNode;
 }>) => (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-            {children}
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+                {children}
+            </ThemeProvider>
         </body>
     </html>
 );
