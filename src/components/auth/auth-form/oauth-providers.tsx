@@ -49,7 +49,7 @@ const OAuthProvider = ({
     };
 
     return (
-        <SimpleTooltip content={`Continue with ${provider.name}`}>
+        <SimpleTooltip content={`Continue with ${provider.name}`} side="bottom">
             <Button
                 className={cn(
                     "text-sm gap-4 bg-zinc-900 border border-muted/75",

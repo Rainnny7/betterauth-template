@@ -1,11 +1,16 @@
 "use client";
 
 import { BetterAuthOptions } from "better-auth";
+import { ArrowLeftIcon } from "lucide-react";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ReactElement, useState } from "react";
 import LoginForm from "~/components/auth/auth-form/login-form";
 import OAuthProviders from "~/components/auth/auth-form/oauth-providers";
 import RegistrationForm from "~/components/auth/auth-form/registration-form";
+import SimpleTooltip from "~/components/simple-tooltip";
+import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { env } from "~/lib/env";
 import { cn } from "~/lib/utils";
@@ -49,6 +54,7 @@ const AuthForm = ({
     logo = "/logo.png",
     title,
 }: AuthFormProps): ReactElement => {
+    const router: AppRouterInstance = useRouter();
     const [error, setError] = useState<string | undefined>(undefined);
 
     // Obtain the title from the form type if needed
@@ -65,10 +71,22 @@ const AuthForm = ({
     return (
         <div
             className={cn(
-                "px-9 py-7 min-w-96 flex flex-col gap-5 bg-card border border-muted/65 rounded-lg select-none",
+                "relative px-9 py-7 min-w-96 flex flex-col gap-5 bg-card border border-muted/65 rounded-lg select-none",
                 className
             )}
         >
+            {/* Back Button */}
+            <SimpleTooltip content="Back" side="bottom">
+                <Button
+                    className="group absolute top-2.5 left-2.5 text-muted-foreground hover:!bg-transparent"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => router.back()}
+                >
+                    <ArrowLeftIcon className="size-4 group-hover:-translate-x-0.5 transition-transform transform-gpu" />
+                </Button>
+            </SimpleTooltip>
+
             <Header logo={logo} title={title} />
 
             {/* OAuth */}
