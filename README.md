@@ -8,7 +8,7 @@ This template serves as a simple base with a basic dashboard, as well as premade
 
 ## Preview
 Wanna see a live preview? See it [here](https://ba-demo.rainnny.club)!
-![Live Preview](https://preview.fascinated.cc/?url=https://google.ca)
+![Live Preview](https://preview.fascinated.cc/?url=https://ba-demo.rainnny.club)
 
 ## Stack
 -   TypeScript
@@ -16,3 +16,7 @@ Wanna see a live preview? See it [here](https://ba-demo.rainnny.club)!
 -   TailwindCSS
 -   BetterAuth
 -   Drizzle
+
+## Roadmap/Ideas
+-   [ ] A CLI to scaffold a project with auth?
+-   [ ] A react lib with the components already in it?

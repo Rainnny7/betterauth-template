@@ -10,11 +10,14 @@ export const env = createEnv({
 
         // BetterAuth
         BETTER_AUTH_SECRET: z.string(),
+        DISCORD_CLIENT_ID: z.string(),
+        DISCORD_CLIENT_SECRET: z.string(),
     },
 
     client: {
         // App
         NEXT_PUBLIC_BASE_URL: z.string(),
+        NEXT_PUBLIC_APP_NAME: z.string(),
     },
 
     runtimeEnv: {
@@ -22,12 +25,14 @@ export const env = createEnv({
 
         // App
         NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
-
+        NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
         // Drizzle
         DRIZZLE_DATABASE_URL: process.env.DRIZZLE_DATABASE_URL,
 
         // BetterAuth
         BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+        DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
+        DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
     },
 
     /**
