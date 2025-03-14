@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ReactNode } from "react";
-import { ThemeProvider } from "~/components/theme-provider";
 import Toolbar from "~/components/toolbar";
+import AppProviders from "~/providers/app-providers";
 import "../styles/globals.css";
 
 const geistSans = Geist({
@@ -33,7 +33,7 @@ const RootLayout = ({
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth select-none`}
         >
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <AppProviders>
                 <div
                     className="px-5"
                     style={{
@@ -46,7 +46,7 @@ const RootLayout = ({
                     </div>
                     <Toolbar />
                 </div>
-            </ThemeProvider>
+            </AppProviders>
         </body>
     </html>
 );

@@ -1,6 +1,6 @@
 import { Github, LogIn } from "lucide-react";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
-import Link from "next/link";
 import { ReactElement } from "react";
 import AnimatedRightChevron from "~/components/animated-right-chevron";
 import { AuroraText } from "~/components/magicui/aurora-text";

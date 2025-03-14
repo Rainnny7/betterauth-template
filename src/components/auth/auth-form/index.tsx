@@ -2,10 +2,11 @@
 
 import { BetterAuthOptions } from "better-auth";
 import { ArrowLeftIcon } from "lucide-react";
+import { Link } from "next-view-transitions";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ReactElement, useState } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import LoginForm from "~/components/auth/auth-form/login-form";
 import OAuthProviders from "~/components/auth/auth-form/oauth-providers";
 import RegistrationForm from "~/components/auth/auth-form/registration-form";
@@ -45,6 +46,16 @@ type AuthFormProps = {
      * The title of the form.
      */
     title?: string;
+
+    /**
+     * The terms and conditions to display in the form.
+     */
+    termsAndConditions?: string;
+
+    /**
+     * The privacy policy to display in the form.
+     */
+    privacyPolicy?: string;
 };
 
 const AuthForm = ({
@@ -53,6 +64,8 @@ const AuthForm = ({
     type = "auto",
     logo = "/logo.png",
     title,
+    termsAndConditions,
+    privacyPolicy,
 }: AuthFormProps): ReactElement => {
     const router: AppRouterInstance = useRouter();
     const [error, setError] = useState<string | undefined>(undefined);
@@ -115,6 +128,13 @@ const AuthForm = ({
             )}
 
             {error && <p className="mx-auto text-destructive">{error}</p>}
+
+            {(termsAndConditions || privacyPolicy) && (
+                <LegalFooter
+                    termsAndConditions={termsAndConditions}
+                    privacyPolicy={privacyPolicy}
+                />
+            )}
         </div>
     );
 };
@@ -134,6 +154,44 @@ const Header = ({ logo, title }: { logo: string; title: string }) => (
             Hello there, please login to continue
         </p>
     </div>
+);
+
+const LegalFooter = ({
+    termsAndConditions,
+    privacyPolicy,
+}: {
+    termsAndConditions?: string;
+    privacyPolicy?: string;
+}) => (
+    <footer className="flex flex-col gap-1 items-center text-sm text-muted-foreground">
+        <span>By continuing, you agree to our</span>
+        <div className="flex gap-3.5 items-center">
+            {termsAndConditions && (
+                <LegalLink href={termsAndConditions}>
+                    Terms of Service
+                </LegalLink>
+            )}
+            {privacyPolicy && (
+                <LegalLink href={privacyPolicy}>Privacy Policy</LegalLink>
+            )}
+        </div>
+    </footer>
+);
+
+const LegalLink = ({
+    href,
+    children,
+}: {
+    href: string;
+    children: ReactNode;
+}) => (
+    <Link
+        className="hover:text-primary transition-colors transform-gpu"
+        href={href}
+        draggable={false}
+    >
+        {children}
+    </Link>
 );
 
 export default AuthForm;

@@ -8,7 +8,7 @@ import {
     LucideIcon,
     Shield,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
 import LoggedIn from "~/components/auth/logged-in";
@@ -70,9 +70,8 @@ const Toolbar = (): ReactElement => {
                             >
                                 <Button
                                     className={cn(
-                                        "size-5",
-                                        active &&
-                                            "text-primary/90 hover:text-primary"
+                                        "size-5 opacity-80 hover:opacity-100 hover:!bg-transparent",
+                                        active && "text-primary hover:text-primary"
                                     )}
                                     variant="ghost"
                                     size="icon"

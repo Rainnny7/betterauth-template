@@ -7,7 +7,12 @@ import { Label } from "~/components/ui/label";
 const LoginForm = (): ReactElement => (
     <form className="flex flex-col gap-5">
         <EmailInput />
-        <Button className="gap-2" type="submit" variant="secondary" size="sm">
+        <Button
+            className="group gap-2"
+            type="submit"
+            variant="secondary"
+            size="sm"
+        >
             Continue
             <AnimatedRightChevron />
         </Button>

@@ -8,8 +8,12 @@ export const metadata: Metadata = {
 };
 
 const AuthPage = (): ReactElement => (
-    <div>
-        <AuthForm authOptions={toClientAuthOptions(auth.options)} />
-    </div>
+    <main>
+        <AuthForm
+            authOptions={toClientAuthOptions(auth.options)}
+            termsAndConditions="https://example.com/legal/terms"
+            privacyPolicy="https://example.com/legal/privacy"
+        />
+    </main>
 );
 export default AuthPage;
