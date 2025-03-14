@@ -1,6 +1,7 @@
 import { BetterAuthOptions } from "better-auth";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
 import { authClient } from "~/lib/auth-client";
@@ -41,11 +42,15 @@ const OAuthProvider = ({
     showNames: boolean;
     setError: (error: string | undefined) => void;
 }): ReactElement => {
+    const [loading, setLoading] = useState<boolean>(false);
+
     const handleLogin = async () => {
+        setLoading(true);
         const { error } = await authClient.signIn.social({
             provider: provider.id,
         });
         if (error) setError(error.message);
+        setLoading(false);
     };
 
     return (
@@ -58,14 +63,19 @@ const OAuthProvider = ({
                 variant="secondary"
                 size="sm"
                 onClick={handleLogin}
+                disabled={loading}
             >
-                <Image
-                    src={`https://img.clerk.com/static/${provider.id}.svg?width=80`}
-                    alt={provider.name}
-                    width={16}
-                    height={16}
-                    unoptimized
-                />
+                {loading ? (
+                    <Loader2 className="size-4 animate-spin" />
+                ) : (
+                    <Image
+                        src={`https://img.clerk.com/static/${provider.id}.svg?width=80`}
+                        alt={provider.name}
+                        width={16}
+                        height={16}
+                        unoptimized
+                    />
+                )}
                 {showNames && provider.name}
             </Button>
         </SimpleTooltip>

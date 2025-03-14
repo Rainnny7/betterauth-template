@@ -1,5 +1,6 @@
 import { betterAuth, BetterAuthOptions } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { username } from "better-auth/plugins";
 import { db } from "~/lib/database";
 import { env } from "~/lib/env";
 import * as schema from "./database/schemas/auth-schema";
@@ -24,6 +25,7 @@ export const auth = betterAuth({
             clientSecret: env.DISCORD_CLIENT_SECRET as string,
         },
     },
+    plugins: [username()],
 });
 
 export const toClientAuthOptions = (authOptions: BetterAuthOptions) => {

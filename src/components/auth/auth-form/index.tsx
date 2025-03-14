@@ -13,7 +13,7 @@ import RegistrationForm from "~/components/auth/auth-form/registration-form";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
-import { env } from "~/lib/env";
+import { env, isProd } from "~/lib/env";
 import { cn } from "~/lib/utils";
 
 type AuthFormProps = {
@@ -82,58 +82,81 @@ const AuthForm = ({
 
     // Render the form
     return (
-        <div
-            className={cn(
-                "relative px-9 py-7 min-w-96 flex flex-col gap-5 bg-card border border-muted/65 rounded-lg select-none",
-                className
-            )}
-        >
-            {/* Back Button */}
-            <SimpleTooltip content="Back" side="bottom">
-                <Button
-                    className="group absolute top-2.5 left-2.5 text-muted-foreground hover:!bg-transparent"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => router.back()}
-                >
-                    <ArrowLeftIcon className="size-4 group-hover:-translate-x-0.5 transition-transform transform-gpu" />
-                </Button>
-            </SimpleTooltip>
+        <div className="flex flex-col">
+            {/* Card */}
+            <div
+                className={cn(
+                    "relative px-9 py-7 min-w-96 flex flex-col gap-5 bg-card border border-muted/65 rounded-lg select-none z-10",
+                    className
+                )}
+            >
+                {/* Back Button */}
+                <SimpleTooltip content="Go Back" side="bottom">
+                    <Button
+                        className="group absolute top-2.5 left-2.5 text-muted-foreground hover:!bg-transparent"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => router.back()}
+                    >
+                        <ArrowLeftIcon className="size-4 group-hover:-translate-x-0.5 transition-transform transform-gpu" />
+                    </Button>
+                </SimpleTooltip>
 
-            <Header logo={logo} title={title} />
+                <Header logo={logo} title={title} />
 
-            {/* OAuth */}
-            {authOptions.socialProviders && (
-                <>
-                    <OAuthProviders
-                        authOptions={authOptions}
-                        setError={setError}
+                {/* OAuth */}
+                {authOptions.socialProviders && (
+                    <>
+                        <OAuthProviders
+                            authOptions={authOptions}
+                            setError={setError}
+                        />
+                        {authOptions.emailAndPassword?.enabled && (
+                            <div className="relative my-1.5">
+                                <Separator />
+                                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-card px-5 text-sm text-muted-foreground">
+                                    Or
+                                </span>
+                            </div>
+                        )}
+                    </>
+                )}
+
+                {/* Login/Registration Forms */}
+                {authOptions.emailAndPassword?.enabled && (
+                    <>
+                        {type === "register" ? (
+                            <RegistrationForm />
+                        ) : (
+                            <LoginForm />
+                        )}
+                    </>
+                )}
+
+                {error && <p className="mx-auto text-destructive">{error}</p>}
+
+                {(termsAndConditions || privacyPolicy) && (
+                    <LegalFooter
+                        termsAndConditions={termsAndConditions}
+                        privacyPolicy={privacyPolicy}
                     />
-                    {authOptions.emailAndPassword?.enabled && (
-                        <div className="relative my-1.5">
-                            <Separator />
-                            <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-card px-5 text-sm text-muted-foreground">
-                                Or
-                            </span>
-                        </div>
-                    )}
-                </>
-            )}
+                )}
+            </div>
 
-            {/* Email & Password */}
-            {authOptions.emailAndPassword?.enabled && (
-                <>
-                    {type === "register" ? <RegistrationForm /> : <LoginForm />}
-                </>
-            )}
-
-            {error && <p className="mx-auto text-destructive">{error}</p>}
-
-            {(termsAndConditions || privacyPolicy) && (
-                <LegalFooter
-                    termsAndConditions={termsAndConditions}
-                    privacyPolicy={privacyPolicy}
-                />
+            {/* Development Footer */}
+            {!isProd && (
+                <div
+                    className="-translate-y-3 p-3.5 pt-5 flex gap-1 justify-center text-sm bg-zinc-900/65 text-muted-foreground border border-muted/65 rounded-lg"
+                    style={{
+                        background:
+                            "linear-gradient(to bottom, hsl(240, 6%, 10%), rgba(253, 154, 0, 0.09))",
+                    }}
+                >
+                    Operating in{" "}
+                    <span className="text-[#DA8702] font-medium">
+                        Development
+                    </span>
+                </div>
             )}
         </div>
     );

@@ -71,7 +71,8 @@ const Toolbar = (): ReactElement => {
                                 <Button
                                     className={cn(
                                         "size-5 opacity-80 hover:opacity-100 hover:!bg-transparent",
-                                        active && "text-primary hover:text-primary"
+                                        active &&
+                                            "text-primary hover:text-primary"
                                     )}
                                     variant="ghost"
                                     size="icon"
@@ -99,7 +100,7 @@ const Toolbar = (): ReactElement => {
                 </LoggedOut>
 
                 {/* Profile */}
-                <LoggedIn>LOGGED IN</LoggedIn>
+                <LoggedIn>logged in</LoggedIn>
             </div>
         </div>
     );
