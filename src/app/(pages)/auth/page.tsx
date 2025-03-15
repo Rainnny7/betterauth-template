@@ -11,6 +11,8 @@ const AuthPage = (): ReactElement => (
     <main>
         <AuthForm
             authOptions={toClientAuthOptions(auth.options)}
+            type="auto"
+            logo="/logo.png"
             termsAndConditions="https://example.com/legal/terms"
             privacyPolicy="https://example.com/legal/privacy"
         />

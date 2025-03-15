@@ -7,15 +7,18 @@ import {
     LogIn,
     LucideIcon,
     Shield,
+    User2,
 } from "lucide-react";
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
 import LoggedIn from "~/components/auth/logged-in";
 import LoggedOut from "~/components/auth/logged-out";
+import UserButton from "~/components/auth/user-button";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
+import { User } from "~/types/auth";
 
 type ToolbarLink = {
     name: string;
@@ -100,7 +103,19 @@ const Toolbar = (): ReactElement => {
                 </LoggedOut>
 
                 {/* Profile */}
-                <LoggedIn>logged in</LoggedIn>
+
+                <LoggedIn>
+                    <UserButton
+                        trigger={(user: User) => (
+                            <Button className="h-6" variant="outline" size="sm">
+                                {user.username
+                                    ? `@${user.username}`
+                                    : user.name}
+                                <User2 className="size-3.5" />
+                            </Button>
+                        )}
+                    />
+                </LoggedIn>
             </div>
         </div>
     );

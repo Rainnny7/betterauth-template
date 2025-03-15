@@ -52,6 +52,11 @@ type AuthFormProps = {
     title?: string;
 
     /**
+     * The subtitle of the form.
+     */
+    subtitle?: string;
+
+    /**
      * The terms and conditions to display in the form.
      */
     termsAndConditions?: string;
@@ -68,6 +73,7 @@ const AuthForm = ({
     type: initialType = "auto",
     logo = "/logo.png",
     title,
+    subtitle = "Hello there, please login to continue",
     termsAndConditions,
     privacyPolicy,
 }: AuthFormProps): ReactElement => {
@@ -110,7 +116,7 @@ const AuthForm = ({
                     </Button>
                 </SimpleTooltip>
 
-                <Header logo={logo} title={title} />
+                <Header logo={logo} title={title} subtitle={subtitle} />
 
                 {/* OAuth */}
                 {authOptions.socialProviders && (
@@ -180,7 +186,15 @@ const AuthForm = ({
     );
 };
 
-const Header = ({ logo, title }: { logo: string; title: string }) => (
+const Header = ({
+    logo,
+    title,
+    subtitle,
+}: {
+    logo: string;
+    title: string;
+    subtitle: string;
+}) => (
     <div className="flex flex-col gap-1.5 items-center">
         <Image
             className="py-7"
@@ -191,9 +205,7 @@ const Header = ({ logo, title }: { logo: string; title: string }) => (
             draggable={false}
         />
         <h1 className="font-bold">{title}</h1>
-        <p className="text-xs text-muted-foreground">
-            Hello there, please login to continue
-        </p>
+        <p className="text-xs text-muted-foreground">{subtitle}</p>
     </div>
 );
 
