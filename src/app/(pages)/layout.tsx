@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ReactNode } from "react";
 import Toolbar from "~/components/toolbar";
@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     },
     twitter: { card: "summary" },
 };
+export const viewport: Viewport = { themeColor: "#000000" };
 
 const RootLayout = ({
     children,
