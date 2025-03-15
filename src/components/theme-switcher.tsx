@@ -44,7 +44,9 @@ const ThemeSwitcher = (): ReactElement => {
                     return (
                         <DropdownMenuItem
                             key={theme.name}
-                            className={cn(active && "text-primary")}
+                            className={cn(
+                                active && "text-primary/90 hover:!text-primary"
+                            )}
                             onClick={() => setTheme(theme.name.toLowerCase())}
                         >
                             <theme.icon className="size-4 mr-1" />
