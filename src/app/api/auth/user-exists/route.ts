@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { db } from "~/lib/database";
 import { users } from "~/lib/database/schemas/auth-schema";
@@ -29,7 +29,11 @@ export const POST = async (request: Request): Promise<NextResponse> => {
         await db
             .select()
             .from(users)
-            .where(eq(users[isValidEmail(input) ? "email" : "username"], input))
+            .where(
+                sql`LOWER(${
+                    users[isValidEmail(input) ? "email" : "username"]
+                }) = ${input.toLowerCase()}`
+            )
             .limit(1)
     )?.[0];
     return NextResponse.json({ exists: !!user }, { status: user ? 200 : 404 });
