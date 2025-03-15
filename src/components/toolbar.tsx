@@ -1,30 +1,39 @@
 "use client";
 
 import {
+    Book,
     ExternalLink,
     Github,
     Home,
     LogIn,
     LucideIcon,
-    Shield,
 } from "lucide-react";
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
 import LoggedOut from "~/components/auth/logged-out";
 import UserAvatar from "~/components/auth/user-avatar";
-import UserButton from "~/components/auth/user-button";
 import UserPopover from "~/components/auth/user-dropdown";
 import SimpleTooltip from "~/components/simple-tooltip";
+import ThemeSwitcher from "~/components/theme-switcher";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 import { User } from "~/types/auth";
 
 type ToolbarLink = {
     name: string;
-    icon: LucideIcon;
-    href: string;
-};
+} & (
+    | {
+          icon: LucideIcon;
+          href: string;
+          element?: never;
+      }
+    | {
+          icon?: never;
+          href?: never;
+          element: ReactElement;
+      }
+);
 
 const links: ToolbarLink[] = [
     {
@@ -34,13 +43,17 @@ const links: ToolbarLink[] = [
     },
     {
         name: "BetterAuth",
-        icon: Shield,
-        href: "https://better-auth.com",
+        icon: Book,
+        href: "https://better-auth.com/docs",
     },
     {
         name: "Star on GitHub <3",
         icon: Github,
         href: "https://github.com/Rainnny7/betterauth-template",
+    },
+    {
+        name: "Theme Switcher",
+        element: <ThemeSwitcher />,
     },
 ];
 
@@ -51,6 +64,17 @@ const Toolbar = (): ReactElement => {
             {/* Links */}
             <div className="flex gap-1.5 items-center">
                 {links.map((link: ToolbarLink) => {
+                    // If the link has an element, render it
+                    if (link.element) {
+                        return (
+                            <SimpleTooltip key={link.name} content={link.name}>
+                                <div className="flex items-center">
+                                    {link.element}
+                                </div>
+                            </SimpleTooltip>
+                        );
+                    }
+                    // If the link has a href, render it
                     const active: boolean = path === link.href;
                     const external: boolean = !link.href.startsWith("/");
                     return (
