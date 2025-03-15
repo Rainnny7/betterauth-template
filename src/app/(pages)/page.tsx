@@ -48,7 +48,7 @@ const LandingPage = (): ReactElement => (
                     </span>
                 </div>
 
-                <p className="max-w-lg md:max-w-none text-lg lg:text-xl text-muted-foreground">
+                <p className="max-w-lg md:max-w-none md:text-lg text-muted-foreground">
                     A template for building a web app using BetterAuth for
                     authentication.
                 </p>

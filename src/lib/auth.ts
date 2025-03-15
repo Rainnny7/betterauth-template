@@ -1,6 +1,6 @@
 import { betterAuth, BetterAuthOptions } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { captcha, username } from "better-auth/plugins";
+import { username } from "better-auth/plugins";
 import { db } from "~/lib/database";
 import { env } from "~/lib/env";
 
@@ -28,11 +28,11 @@ export const auth = betterAuth({
     },
     plugins: [
         username(),
-        captcha({
-            provider: "cloudflare-turnstile",
-            secretKey: env.TURNSTILE_SECRET_KEY,
-            endpoints: ["/auth"],
-        }),
+        // captcha({
+        //     provider: "cloudflare-turnstile",
+        //     secretKey: env.TURNSTILE_SECRET_KEY,
+        //     endpoints: ["/auth"],
+        // }),
     ],
 });
 

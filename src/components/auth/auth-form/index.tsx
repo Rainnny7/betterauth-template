@@ -7,7 +7,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ReactElement, ReactNode, useState } from "react";
-import LoginForm from "~/components/auth/auth-form/login-form";
+import LoginForm from "~/components/auth/auth-form/login-view";
 import OAuthProviders from "~/components/auth/auth-form/oauth-providers";
 import RegistrationForm from "~/components/auth/auth-form/registration-form";
 import SimpleTooltip from "~/components/simple-tooltip";
@@ -131,10 +131,7 @@ const AuthForm = ({
                         {type === "register" ? (
                             <RegistrationForm />
                         ) : (
-                            <LoginForm
-                                setType={setType}
-                                setError={setError}
-                            />
+                            <LoginForm setType={setType} setError={setError} />
                         )}
                     </>
                 )}

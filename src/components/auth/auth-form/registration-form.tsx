@@ -1,32 +1,52 @@
-import { Loader2 } from "lucide-react";
-import { ReactElement, useState } from "react";
-import AnimatedRightChevron from "~/components/animated-right-chevron";
-import EmailInput from "~/components/auth/auth-form/email-input";
-import PasswordInput from "~/components/auth/auth-form/password.input";
-import { Button } from "~/components/ui/button";
+import { AtSign, Mail, User } from "lucide-react";
+import { ReactElement } from "react";
+import FormInput, {
+    FormInputGroup,
+    PasswordInput,
+} from "~/components/auth/auth-form/form-input";
+import GenericFormView from "~/components/auth/auth-form/generic-form-view";
 
 const RegistrationForm = (): ReactElement => {
-    const [loading, setLoading] = useState<boolean>(false);
+    const handleRegistration = async (form: FormData) => {
+        console.log({ form });
+    };
 
     return (
-        <form className="flex flex-col gap-3.5">
-            <EmailInput disabled={false} />
-            <PasswordInput />
-            <Button
-                className="group mt-1 gap-2"
-                type="submit"
-                variant="secondary"
-                size="sm"
-                disabled={loading}
-            >
-                Register
-                {loading ? (
-                    <Loader2 className="size-4 animate-spin" />
-                ) : (
-                    <AnimatedRightChevron />
-                )}
-            </Button>
-        </form>
+        <GenericFormView
+            formInputs={[
+                <FormInputGroup key="name-phone">
+                    <FormInput
+                        key="name"
+                        className="w-40"
+                        label="Name"
+                        name="name"
+                        type="text"
+                        icon={User}
+                        required
+                    />
+                    <FormInput
+                        key="username"
+                        className="w-40"
+                        label="Username"
+                        name="username"
+                        type="text"
+                        icon={AtSign}
+                    />
+                </FormInputGroup>,
+                <FormInput
+                    key="email"
+                    label="Email Address"
+                    name="email"
+                    type="email"
+                    icon={Mail}
+                    required
+                />,
+                <PasswordInput key="password" />,
+            ]}
+            submitText="Register"
+            onSubmit={handleRegistration}
+        />
     );
 };
+
 export default RegistrationForm;
