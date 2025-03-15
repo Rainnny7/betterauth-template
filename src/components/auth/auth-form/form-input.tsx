@@ -1,5 +1,6 @@
-import { Lock, LucideIcon } from "lucide-react";
-import { ComponentProps, ReactElement } from "react";
+import { Eye, EyeClosed, Lock, LucideIcon } from "lucide-react";
+import { ComponentProps, ReactElement, useState } from "react";
+import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { cn } from "~/lib/utils";
@@ -60,15 +61,30 @@ const FormInput = ({
     </div>
 );
 
-export const PasswordInput = (): ReactElement => (
-    <FormInput
-        label="Password"
-        name="password"
-        type="password"
-        icon={Lock}
-        required
-    />
-);
+export const PasswordInput = (): ReactElement => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    return (
+        <div className="relative">
+            <FormInput
+                label="Password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                icon={Lock}
+                required
+            />
+            <Button
+                className="absolute right-2 top-2/3 -translate-y-1/2 mt-px text-muted-foreground hover:!bg-transparent"
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={() => setShowPassword((prev) => !prev)}
+            >
+                {showPassword ? <Eye /> : <EyeClosed />}
+            </Button>
+        </div>
+    );
+};
 
 export const FormInputGroup = ({
     children,
