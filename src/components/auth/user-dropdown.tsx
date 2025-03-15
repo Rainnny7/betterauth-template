@@ -2,6 +2,7 @@
 
 import { format } from "date-fns";
 import { ReactElement, ReactNode } from "react";
+import { toast } from "sonner";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -62,7 +63,13 @@ const UserPopover = ({
                 <DropdownMenuItem>Profile Settings</DropdownMenuItem>
                 <DropdownMenuItem>Account Settings</DropdownMenuItem>
                 <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team Management</DropdownMenuItem>
+                <DropdownMenuItem
+                    onClick={() => {
+                        toast.info("Hello World (:");
+                    }}
+                >
+                    Hello World
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="text-red-600 focus:text-red-600">
                     Log Out
