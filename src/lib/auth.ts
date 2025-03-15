@@ -11,6 +11,7 @@ export type ExtendedBetterAuthOptions = BetterAuthOptions & {
 };
 
 export const auth = betterAuth({
+    baseURL: env.NEXT_PUBLIC_BASE_URL,
     appName: env.NEXT_PUBLIC_APP_NAME,
     authRedirect: "/",
     database: drizzleAdapter(db, {

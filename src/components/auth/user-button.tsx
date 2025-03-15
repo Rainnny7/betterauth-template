@@ -13,6 +13,12 @@ import { authClient } from "~/lib/auth-client";
 import { User } from "~/types/auth";
 
 type UserButtonProps = {
+    /**
+     * The element to display as the trigger.
+     *
+     * @param user the user logged in
+     * @returns the trigger element
+     */
     trigger: (user: User) => ReactNode;
 };
 

@@ -12,7 +12,6 @@ import {
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
-import LoggedIn from "~/components/auth/logged-in";
 import LoggedOut from "~/components/auth/logged-out";
 import UserButton from "~/components/auth/user-button";
 import SimpleTooltip from "~/components/simple-tooltip";
@@ -103,19 +102,14 @@ const Toolbar = (): ReactElement => {
                 </LoggedOut>
 
                 {/* Profile */}
-
-                <LoggedIn>
-                    <UserButton
-                        trigger={(user: User) => (
-                            <Button className="h-6" variant="outline" size="sm">
-                                {user.username
-                                    ? `@${user.username}`
-                                    : user.name}
-                                <User2 className="size-3.5" />
-                            </Button>
-                        )}
-                    />
-                </LoggedIn>
+                <UserButton
+                    trigger={(user: User) => (
+                        <Button className="h-6" variant="outline" size="sm">
+                            {user.username ? `@${user.username}` : user.name}
+                            <User2 className="size-3.5" />
+                        </Button>
+                    )}
+                />
             </div>
         </div>
     );
