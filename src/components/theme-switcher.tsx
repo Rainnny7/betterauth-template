@@ -1,6 +1,6 @@
 "use client";
 
-import { LucideIcon, Monitor, Moon, Sun } from "lucide-react";
+import { LucideIcon, Monitor, Moon, MoonStar, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { ReactElement } from "react";
 import { Button } from "~/components/ui/button";
@@ -19,7 +19,7 @@ type Theme = {
 
 const THEMES: Theme[] = [
     { name: "Light", icon: Sun },
-    { name: "Dark", icon: Moon },
+    { name: "Dark", icon: MoonStar },
     { name: "System", icon: Monitor },
 ];
 
@@ -33,8 +33,8 @@ const ThemeSwitcher = (): ReactElement => {
                     variant="ghost"
                     size="icon"
                 >
-                    <Sun className="size-[1.2rem] rotate-0 scale-100 dark:-rotate-90 dark:scale-0 transition-all transform-gpu" />
-                    <Moon className="absolute size-[1.2rem] rotate-90 scale-0 dark:rotate-0 dark:scale-100 transition-all transform-gpu" />
+                    <{} className="size-[1.2rem] rotate-0 scale-100 dark:-rotate-90 dark:scale-0 transition-all transform-gpu" />
+                    <MoonStar className="absolute size-[1.2rem] rotate-90 scale-0 dark:rotate-0 dark:scale-100 transition-all transform-gpu" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
