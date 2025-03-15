@@ -1,15 +1,9 @@
 import { Loader2 } from "lucide-react";
-import { FormEvent, ReactElement, useState } from "react";
+import { FormEvent, ReactElement, ReactNode, useState } from "react";
 import AnimatedRightChevron from "~/components/animated-right-chevron";
 import { Button } from "~/components/ui/button";
 
 type GenericFormViewProps = {
-    /**
-     * The form inputs to display. Can be either individual FormInput components
-     * or FormInputGroup components containing multiple FormInputs.
-     */
-    formInputs: ReactElement[];
-
     /**
      * The text to display on the submit button.
      */
@@ -19,12 +13,17 @@ type GenericFormViewProps = {
      * The function to call when the form is submitted.
      */
     onSubmit: (form: FormData) => Promise<void>;
+
+    /**
+     * The children (inputs) to display in the form.
+     */
+    children: ReactNode;
 };
 
 const GenericFormView = ({
-    formInputs,
     submitText,
     onSubmit,
+    children,
 }: GenericFormViewProps): ReactElement => {
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -42,9 +41,7 @@ const GenericFormView = ({
             }}
         >
             {/* Inputs */}
-            {formInputs.map((input: ReactElement) => (
-                <div key={input.key}>{input}</div>
-            ))}
+            {children}
 
             {/* Submit */}
             <Button

@@ -94,7 +94,7 @@ const AuthForm = ({
             {/* Card */}
             <div
                 className={cn(
-                    "relative px-9 py-7 min-w-96 flex flex-col gap-5 bg-card border border-muted/65 rounded-lg select-none z-10",
+                    "relative px-9 py-7 min-w-96 flex flex-col gap-5 bg-card border border-muted/65 rounded-lg select-none overflow-y-auto z-10",
                     className
                 )}
             >
@@ -142,6 +142,7 @@ const AuthForm = ({
                         ) : (
                             <LoginView
                                 authOptions={authOptions}
+                                type={type}
                                 setType={setType}
                                 setError={setError}
                                 onSwitchToRegister={setRegistrationData}

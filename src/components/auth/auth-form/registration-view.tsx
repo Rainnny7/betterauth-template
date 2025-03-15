@@ -74,54 +74,43 @@ const RegistrationView = ({
     };
 
     return (
-        <GenericFormView
-            formInputs={[
-                <FormInputGroup key="name-username">
-                    <FormInput
-                        key="name"
-                        className="w-40"
-                        label="Name"
-                        name="name"
-                        type="text"
-                        icon={User}
-                        required
-                    />
-                    <FormInput
-                        key="username"
-                        className="w-40"
-                        label="Username"
-                        name="username"
-                        type="text"
-                        icon={AtSign}
-                        defaultValue={
-                            !prefilledData?.isEmail
-                                ? prefilledData?.input
-                                : undefined
-                        }
-                        disabled={
-                            !prefilledData?.isEmail && !!prefilledData?.input
-                        }
-                    />
-                </FormInputGroup>,
+        <GenericFormView submitText="Register" onSubmit={handleRegistration}>
+            <FormInputGroup key="name-username">
                 <FormInput
-                    key="email"
-                    label="Email Address"
-                    name="email"
-                    type="email"
-                    icon={Mail}
+                    className="w-40"
+                    label="Name"
+                    name="name"
+                    type="text"
+                    icon={User}
                     required
+                />
+                <FormInput
+                    className="w-40"
+                    label="Username"
+                    name="username"
+                    type="text"
+                    icon={AtSign}
                     defaultValue={
-                        prefilledData?.isEmail
+                        !prefilledData?.isEmail
                             ? prefilledData?.input
                             : undefined
                     }
-                    disabled={prefilledData?.isEmail && !!prefilledData?.input}
-                />,
-                <PasswordInput key="password" />,
-            ]}
-            submitText="Register"
-            onSubmit={handleRegistration}
-        />
+                    disabled={!prefilledData?.isEmail && !!prefilledData?.input}
+                />
+            </FormInputGroup>
+            <FormInput
+                label="Email Address"
+                name="email"
+                type="email"
+                icon={Mail}
+                required
+                defaultValue={
+                    prefilledData?.isEmail ? prefilledData?.input : undefined
+                }
+                disabled={prefilledData?.isEmail && !!prefilledData?.input}
+            />
+            <PasswordInput key="password" />
+        </GenericFormView>
     );
 };
 

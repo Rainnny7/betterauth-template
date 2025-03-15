@@ -10,6 +10,7 @@ import FormInput, {
     PasswordInput,
 } from "~/components/auth/auth-form/form-input";
 import GenericFormView from "~/components/auth/auth-form/generic-form-view";
+import { Button } from "~/components/ui/button";
 import { ExtendedBetterAuthOptions } from "~/lib/auth";
 import { authClient } from "~/lib/auth-client";
 import request from "~/lib/request";
@@ -34,6 +35,11 @@ type LoginViewProps = {
     authOptions: ExtendedBetterAuthOptions;
 
     /**
+     * The type of auth form to render.
+     */
+    type: AuthFormType;
+
+    /**
      * The function to call when the type changes.
      */
     setType: (type: AuthFormType) => void;
@@ -51,16 +57,17 @@ type LoginViewProps = {
 
 const LoginView = ({
     authOptions,
+    type,
     setType,
     setError,
     onSwitchToRegister,
 }: LoginViewProps): ReactElement => {
+    const initialType: AuthFormType = type ?? "auto";
     const [promptPassword, setPromptPassword] = useState<boolean>(false);
 
     const handleLogin = async (form: FormData) => {
         const usernameOrEmail: string | undefined = form.get("email") as string;
         if (!usernameOrEmail) {
-            console.log("bob 1");
             setError("Missing required fields ):");
             return;
         }
@@ -92,7 +99,6 @@ const LoginView = ({
             // Attempt to login with the given credentials
             const password: string | undefined = form.get("password") as string;
             if (!password) {
-                console.log("bob 2");
                 setError("Missing required fields ):");
                 return;
             }
@@ -117,9 +123,12 @@ const LoginView = ({
 
     return (
         <GenericFormView
-            formInputs={[
+            submitText={promptPassword ? "Login" : "Continue"}
+            onSubmit={handleLogin}
+        >
+            {/* Username or Email Address */}
+            <div className="relative">
                 <FormInput
-                    key="email"
                     className={cn(
                         promptPassword &&
                             "opacity-50 cursor-not-allowed bg-muted"
@@ -130,12 +139,25 @@ const LoginView = ({
                     icon={Mail}
                     required
                     readOnly={promptPassword}
-                />,
-                ...(!promptPassword ? [] : [<PasswordInput key="password" />]),
-            ]}
-            submitText={promptPassword ? "Login" : "Continue"}
-            onSubmit={handleLogin}
-        />
+                />
+                {promptPassword && (
+                    <Button
+                        className="absolute right-2 top-2/3 -translate-y-1/2 mt-px h-6 text-xs text-muted-foreground"
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                            setType(initialType);
+                            setPromptPassword(false);
+                        }}
+                    >
+                        Not You?
+                    </Button>
+                )}
+            </div>
+
+            {promptPassword && <PasswordInput />}
+        </GenericFormView>
     );
 };
 export default LoginView;
