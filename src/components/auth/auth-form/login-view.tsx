@@ -13,7 +13,7 @@ import GenericFormView from "~/components/auth/auth-form/generic-form-view";
 import { ExtendedBetterAuthOptions } from "~/lib/auth";
 import { authClient } from "~/lib/auth-client";
 import request from "~/lib/request";
-import { isValidEmail } from "~/lib/utils";
+import { cn, isValidEmail } from "~/lib/utils";
 
 export type LoginToRegisterData = {
     /**
@@ -120,12 +120,16 @@ const LoginView = ({
             formInputs={[
                 <FormInput
                     key="email"
+                    className={cn(
+                        promptPassword &&
+                            "opacity-50 cursor-not-allowed bg-muted"
+                    )}
                     label="Username or Email Address"
                     name="email"
                     type="text"
                     icon={Mail}
                     required
-                    disabled={promptPassword}
+                    readOnly={promptPassword}
                 />,
                 ...(!promptPassword ? [] : [<PasswordInput key="password" />]),
             ]}
