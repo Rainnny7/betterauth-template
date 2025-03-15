@@ -22,6 +22,10 @@ export const metadata: Metadata = {
     },
     description:
         "💂🏼‍♂️ A NextJS template app utilizing BetterAuth for authentication.",
+    openGraph: {
+        images: [{ url: "/logo.png", width: 128, height: 128 }],
+    },
+    twitter: { card: "summary" },
 };
 
 const RootLayout = ({

@@ -203,6 +203,7 @@ const Header = ({
             width={42}
             height={42}
             draggable={false}
+            unoptimized
         />
         <h1 className="font-bold">{title}</h1>
         <p className="text-xs text-muted-foreground">{subtitle}</p>
