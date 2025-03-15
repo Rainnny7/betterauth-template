@@ -7,9 +7,9 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ReactElement, ReactNode, useState } from "react";
-import LoginForm from "~/components/auth/auth-form/login-view";
+import LoginView from "~/components/auth/auth-form/login-view";
 import OAuthProviders from "~/components/auth/auth-form/oauth-providers";
-import RegistrationForm from "~/components/auth/auth-form/registration-form";
+import RegistrationView from "~/components/auth/auth-form/registration-view";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
@@ -129,9 +129,9 @@ const AuthForm = ({
                 {authOptions.emailAndPassword?.enabled && (
                     <>
                         {type === "register" ? (
-                            <RegistrationForm />
+                            <RegistrationView />
                         ) : (
-                            <LoginForm setType={setType} setError={setError} />
+                            <LoginView setType={setType} setError={setError} />
                         )}
                     </>
                 )}

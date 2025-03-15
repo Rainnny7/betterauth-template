@@ -12,7 +12,7 @@ import { authClient } from "~/lib/auth-client";
 import request from "~/lib/request";
 import { isValidEmail } from "~/lib/utils";
 
-const LoginForm = ({
+const LoginView = ({
     setType,
     setError,
 }: {
@@ -83,4 +83,4 @@ const LoginForm = ({
         />
     );
 };
-export default LoginForm;
+export default LoginView;

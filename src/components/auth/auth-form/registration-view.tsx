@@ -6,7 +6,7 @@ import FormInput, {
 } from "~/components/auth/auth-form/form-input";
 import GenericFormView from "~/components/auth/auth-form/generic-form-view";
 
-const RegistrationForm = (): ReactElement => {
+const RegistrationView = (): ReactElement => {
     const handleRegistration = async (form: FormData) => {
         console.log({ form });
     };
@@ -14,7 +14,7 @@ const RegistrationForm = (): ReactElement => {
     return (
         <GenericFormView
             formInputs={[
-                <FormInputGroup key="name-phone">
+                <FormInputGroup key="name-username">
                     <FormInput
                         key="name"
                         className="w-40"
@@ -49,4 +49,4 @@ const RegistrationForm = (): ReactElement => {
     );
 };
 
-export default RegistrationForm;
+export default RegistrationView;
