@@ -7,6 +7,8 @@ import { cn } from "~/lib/utils";
 const avatarVariants = cva(undefined, {
     variants: {
         size: {
+            "2xl": "size-16",
+            xl: "size-12",
             default: "size-10",
             sm: "size-8",
             xs: "size-4",
