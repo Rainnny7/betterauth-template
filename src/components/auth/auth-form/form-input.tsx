@@ -74,7 +74,7 @@ export const FormInputGroup = ({
     children,
     className,
 }: FormInputGroupProps): ReactElement => (
-    <div className={cn("grid grid-cols-2 gap-4", className)}>{children}</div>
+    <div className={cn("grid grid-cols-2 gap-3.5", className)}>{children}</div>
 );
 
 export default FormInput;

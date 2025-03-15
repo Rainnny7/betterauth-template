@@ -1,9 +1,9 @@
-import { BetterAuthOptions } from "better-auth";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { ReactElement, useState } from "react";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
+import { ExtendedBetterAuthOptions } from "~/lib/auth";
 import { authClient } from "~/lib/auth-client";
 import { cn } from "~/lib/utils";
 
@@ -11,7 +11,7 @@ const OAuthProviders = ({
     authOptions,
     setError,
 }: {
-    authOptions: BetterAuthOptions;
+    authOptions: ExtendedBetterAuthOptions;
     setError: (error: string | undefined) => void;
 }): ReactElement => {
     // Render the providers

@@ -1,6 +1,5 @@
 "use client";
 
-import { BetterAuthOptions } from "better-auth";
 import { ArrowLeftIcon } from "lucide-react";
 import { Link } from "next-view-transitions";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
@@ -15,6 +14,7 @@ import RegistrationView from "~/components/auth/auth-form/registration-view";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
+import { ExtendedBetterAuthOptions } from "~/lib/auth";
 import { env, isProd } from "~/lib/env";
 import { cn } from "~/lib/utils";
 
@@ -29,7 +29,7 @@ type AuthFormProps = {
     /**
      * The BetterAuth options to use.
      */
-    authOptions: BetterAuthOptions;
+    authOptions: ExtendedBetterAuthOptions;
 
     /**
      * The type of auth form to render.
@@ -135,10 +135,13 @@ const AuthForm = ({
                     <>
                         {type === "register" ? (
                             <RegistrationView
+                                authOptions={authOptions}
                                 prefilledData={registrationData}
+                                setError={setError}
                             />
                         ) : (
                             <LoginView
+                                authOptions={authOptions}
                                 setType={setType}
                                 setError={setError}
                                 onSwitchToRegister={setRegistrationData}

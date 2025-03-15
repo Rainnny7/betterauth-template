@@ -6,8 +6,13 @@ import { env } from "~/lib/env";
 
 import * as schema from "./database/schemas/auth-schema";
 
+export type ExtendedBetterAuthOptions = BetterAuthOptions & {
+    authRedirect?: string;
+};
+
 export const auth = betterAuth({
     appName: env.NEXT_PUBLIC_APP_NAME,
+    authRedirect: "/",
     database: drizzleAdapter(db, {
         provider: "pg",
         schema: {
@@ -39,9 +44,18 @@ export const auth = betterAuth({
 export const toClientAuthOptions = (authOptions: BetterAuthOptions) => {
     const options: BetterAuthOptions = JSON.parse(JSON.stringify(authOptions));
 
-    // Remove every clientSecret entry from the socialProviders object
-    for (const provider of Object.values(options.socialProviders ?? {})) {
-        delete (provider as any).clientSecret;
-    }
+    // Recursively remove any property that contains 'secret' from the entire object
+    const removeSecrets = (obj: any) => {
+        if (!obj || typeof obj !== "object") return;
+        for (const key of Object.keys(obj)) {
+            if (key.toLowerCase().includes("secret")) {
+                delete obj[key];
+            } else if (typeof obj[key] === "object") {
+                removeSecrets(obj[key]);
+            }
+        }
+    };
+
+    removeSecrets(options);
     return options;
 };
