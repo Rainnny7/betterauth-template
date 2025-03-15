@@ -7,12 +7,12 @@ import {
     LogIn,
     LucideIcon,
     Shield,
-    User2,
 } from "lucide-react";
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { ReactElement } from "react";
 import LoggedOut from "~/components/auth/logged-out";
+import UserAvatar from "~/components/auth/user-avatar";
 import UserButton from "~/components/auth/user-button";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
@@ -106,7 +106,7 @@ const Toolbar = (): ReactElement => {
                     trigger={(user: User) => (
                         <Button className="h-6" variant="outline" size="sm">
                             {user.username ? `@${user.username}` : user.name}
-                            <User2 className="size-3.5" />
+                            <UserAvatar size="xs" />
                         </Button>
                     )}
                 />
