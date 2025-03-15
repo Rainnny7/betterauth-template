@@ -14,6 +14,7 @@ import { ReactElement } from "react";
 import LoggedOut from "~/components/auth/logged-out";
 import UserAvatar from "~/components/auth/user-avatar";
 import UserButton from "~/components/auth/user-button";
+import UserPopover from "~/components/auth/user-dropdown";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
@@ -102,7 +103,7 @@ const Toolbar = (): ReactElement => {
                 </LoggedOut>
 
                 {/* Profile */}
-                <UserButton
+                <UserPopover
                     trigger={(user: User) => (
                         <Button className="h-6" variant="outline" size="sm">
                             {user.username ? `@${user.username}` : user.name}
