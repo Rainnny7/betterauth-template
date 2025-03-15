@@ -5,8 +5,15 @@ import FormInput, {
     PasswordInput,
 } from "~/components/auth/auth-form/form-input";
 import GenericFormView from "~/components/auth/auth-form/generic-form-view";
+import { LoginToRegisterData } from "./login-view";
 
-const RegistrationView = (): ReactElement => {
+type RegistrationViewProps = {
+    prefilledData?: LoginToRegisterData;
+};
+
+const RegistrationView = ({
+    prefilledData,
+}: RegistrationViewProps): ReactElement => {
     const handleRegistration = async (form: FormData) => {
         console.log({ form });
     };
@@ -31,6 +38,14 @@ const RegistrationView = (): ReactElement => {
                         name="username"
                         type="text"
                         icon={AtSign}
+                        defaultValue={
+                            !prefilledData?.isEmail
+                                ? prefilledData?.input
+                                : undefined
+                        }
+                        disabled={
+                            !prefilledData?.isEmail && !!prefilledData?.input
+                        }
                     />
                 </FormInputGroup>,
                 <FormInput
@@ -40,6 +55,12 @@ const RegistrationView = (): ReactElement => {
                     type="email"
                     icon={Mail}
                     required
+                    defaultValue={
+                        prefilledData?.isEmail
+                            ? prefilledData?.input
+                            : undefined
+                    }
+                    disabled={prefilledData?.isEmail && !!prefilledData?.input}
                 />,
                 <PasswordInput key="password" />,
             ]}

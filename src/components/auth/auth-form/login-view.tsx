@@ -12,12 +12,19 @@ import { authClient } from "~/lib/auth-client";
 import request from "~/lib/request";
 import { isValidEmail } from "~/lib/utils";
 
+export type LoginToRegisterData = {
+    input: string;
+    isEmail: boolean;
+};
+
 const LoginView = ({
     setType,
     setError,
+    onSwitchToRegister,
 }: {
     setType: (type: AuthFormType) => void;
     setError: (error: string | undefined) => void;
+    onSwitchToRegister?: (data: LoginToRegisterData) => void;
 }): ReactElement => {
     const [promptPassword, setPromptPassword] = useState<boolean>(false);
 
@@ -40,6 +47,11 @@ const LoginView = ({
             if (doesUserExist) {
                 setPromptPassword(true);
             } else {
+                const isEmailInput = isValidEmail(usernameOrEmail);
+                onSwitchToRegister?.({
+                    input: usernameOrEmail,
+                    isEmail: isEmailInput,
+                });
                 setType("register");
             }
         } else {

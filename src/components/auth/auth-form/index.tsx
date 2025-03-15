@@ -7,7 +7,9 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ReactElement, ReactNode, useState } from "react";
-import LoginView from "~/components/auth/auth-form/login-view";
+import LoginView, {
+    LoginToRegisterData,
+} from "~/components/auth/auth-form/login-view";
 import OAuthProviders from "~/components/auth/auth-form/oauth-providers";
 import RegistrationView from "~/components/auth/auth-form/registration-view";
 import SimpleTooltip from "~/components/simple-tooltip";
@@ -72,6 +74,9 @@ const AuthForm = ({
     const router: AppRouterInstance = useRouter();
     const [type, setType] = useState<AuthFormType>(initialType);
     const [error, setError] = useState<string | undefined>(undefined);
+    const [registrationData, setRegistrationData] = useState<
+        LoginToRegisterData | undefined
+    >(undefined);
 
     // Obtain the title from the form type if needed
     if (!title) {
@@ -129,9 +134,15 @@ const AuthForm = ({
                 {authOptions.emailAndPassword?.enabled && (
                     <>
                         {type === "register" ? (
-                            <RegistrationView />
+                            <RegistrationView
+                                prefilledData={registrationData}
+                            />
                         ) : (
-                            <LoginView setType={setType} setError={setError} />
+                            <LoginView
+                                setType={setType}
+                                setError={setError}
+                                onSwitchToRegister={setRegistrationData}
+                            />
                         )}
                     </>
                 )}
