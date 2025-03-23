@@ -60,7 +60,7 @@ const links: ToolbarLink[] = [
 const Toolbar = (): ReactElement => {
     const path: string = usePathname();
     return (
-        <div className="absolute inset-x-0 bottom-6 mx-auto px-2.5 py-1.5 w-fit flex gap-5 justify-between items-center bg-zinc-900/75 backdrop-blur-md border border-muted-foreground/15 rounded-full z-50">
+        <div className="absolute inset-x-0 bottom-8 mx-auto px-2.5 py-1.5 w-fit flex gap-5 justify-between items-center bg-zinc-900/75 backdrop-blur-md border border-muted-foreground/15 rounded-full z-50">
             {/* Links */}
             <div className="flex gap-1.5 items-center">
                 {links.map((link: ToolbarLink) => {
