@@ -25,6 +25,7 @@ const OAuthProviders = ({
                         key={provider.id}
                         provider={provider}
                         showNames={showNames}
+                        authOptions={authOptions}
                         setError={setError}
                     />
                 )
@@ -36,10 +37,12 @@ const OAuthProviders = ({
 const OAuthProvider = ({
     provider,
     showNames,
+    authOptions,
     setError,
 }: {
     provider: any;
     showNames: boolean;
+    authOptions: ExtendedBetterAuthOptions;
     setError: (error: string | undefined) => void;
 }): ReactElement => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -48,9 +51,10 @@ const OAuthProvider = ({
         setLoading(true);
         const { error } = await authClient.signIn.social({
             provider: provider.id,
+            callbackURL: authOptions.authRedirect ?? "/app",
         });
-        if (error) setError(error.message);
         setLoading(false);
+        setError(error?.message);
     };
 
     return (
