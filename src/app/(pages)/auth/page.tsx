@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const AuthPage = (): ReactElement => (
-    <main>
+    <main className="min-h-screen flex justify-center items-center">
         <AuthForm
             authOptions={toClientAuthOptions(auth.options)}
             type="auto"

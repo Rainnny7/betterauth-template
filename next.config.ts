@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     typescript: { ignoreBuildErrors: true },
     experimental: {
         reactCompiler: true,
+        nodeMiddleware: true,
     },
     transpilePackages: ["@t3-oss/env-nextjs", "@t3-oss/env-core"],
 };
