@@ -7,62 +7,49 @@ import { AuroraText } from "~/components/magicui/aurora-text";
 import { Button } from "~/components/ui/button";
 
 const LandingPage = (): ReactElement => (
-    <main className="flex flex-col gap-14 justify-center text-center items-center">
+    <main className="flex flex-col gap-4 justify-center">
         {/* Logo */}
         <Image
             src="/logo.png"
             alt="BetterAuth Logo"
-            width={124}
-            height={124}
+            width={54}
+            height={54}
             draggable={false}
         />
 
-        <div className="flex flex-col gap-6 items-center">
+        <div className="flex flex-col gap-5 xs:gap-4">
             {/* Header */}
-            <div className="flex flex-col gap-3.5 items-center">
-                <div className="relative">
-                    <AuroraText
-                        className="!h-14 text-4xl lg:text-5xl font-bold"
-                        colors={[
-                            "#1447e6",
-                            "#155dfc",
-                            "#155dfc",
-                            "#2b7fff",
-                            "#2b7fff",
-                            "#2b7fff",
-                        ]}
-                    >
-                        BetterAuth Template
-                    </AuroraText>
+            <div className="flex flex-col gap-1.5">
+                <AuroraText
+                    className="!h-8 text-2xl lg:text-3xl font-bold"
+                    colors={[
+                        "#1447e6",
+                        "#155dfc",
+                        "#155dfc",
+                        "#2b7fff",
+                        "#2b7fff",
+                        "#2b7fff",
+                        "#2b7fff",
+                    ]}
+                >
+                    BetterAuth Template
+                </AuroraText>
 
-                    <span className="absolute inset-x-0 -bottom-2.5 text-xs text-muted-foreground/65">
-                        Made by{" "}
-                        <Link
-                            className="text-primary/85 hover:text-primary transition-colors transform-gpu"
-                            href="https://github.com/Rainnny7"
-                            target="_blank"
-                        >
-                            Rainnny7
-                        </Link>{" "}
-                        <span className="animate-pulse">❤️</span>
-                    </span>
-                </div>
-
-                <p className="max-w-lg md:max-w-none md:text-lg text-muted-foreground">
+                <p className="max-w-lg md:max-w-none text-sm text-muted-foreground">
                     A template for building a web app using BetterAuth for
                     authentication.
                 </p>
             </div>
 
             {/* Buttons */}
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-col xs:flex-row gap-2 xs:items-center">
                 {/* Get Started */}
                 <Link
                     href="https://github.com/Rainnny7/betterauth-template"
                     target="_blank"
                     draggable={false}
                 >
-                    <Button className="group w-48 gap-3" size="lg">
+                    <Button className="group w-full xs:w-40 gap-3" size="sm">
                         <Github />
                         Get Started
                         <AnimatedRightChevron />
@@ -72,9 +59,9 @@ const LandingPage = (): ReactElement => (
                 {/* Login */}
                 <Link href="/auth" draggable={false}>
                     <Button
-                        className="w-32 gap-3"
+                        className="w-full xs:w-32 gap-3"
                         variant="secondary"
-                        size="lg"
+                        size="sm"
                     >
                         Login <LogIn />
                     </Button>
