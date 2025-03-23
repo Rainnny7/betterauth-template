@@ -62,7 +62,7 @@ const LandingPage = (): ReactElement => (
                     target="_blank"
                     draggable={false}
                 >
-                    <Button className="group w-52 gap-3" size="lg">
+                    <Button className="group w-48 gap-3" size="lg">
                         <Github />
                         Get Started
                         <AnimatedRightChevron />
@@ -72,7 +72,7 @@ const LandingPage = (): ReactElement => (
                 {/* Login */}
                 <Link href="/auth" draggable={false}>
                     <Button
-                        className="w-36 gap-3"
+                        className="w-32 gap-3"
                         variant="secondary"
                         size="lg"
                     >
