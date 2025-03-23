@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ReactNode } from "react";
-import Toolbar from "~/components/toolbar";
 import { cn } from "~/lib/utils";
 import AppProviders from "~/providers/app-providers";
 import "../styles/globals.css";
@@ -43,24 +42,24 @@ const RootLayout = ({
                 <div
                     className={cn(
                         "px-5",
-                        "before:lg:absolute before:inset-x-0 before:top-12 before:w-full before:h-px before:bg-muted/60", // Top grid line
-                        "after:lg:absolute after:inset-x-0 after:bottom-12 after:w-full after:h-px after:bg-muted/60" // Bottom grid line
+                        "before:lg:absolute before:inset-x-0 before:top-12 before:w-full before:h-px before:bg-grid-line", // Top grid line
+                        "after:lg:absolute after:inset-x-0 after:bottom-12 after:w-full after:h-px after:bg-grid-line" // Bottom grid line
                     )}
                     style={{
                         background:
-                            "linear-gradient(to top, hsla(240, 6%, 10%, 0.45), var(--background))",
+                            "linear-gradient(to top, hsla(240, 6%, 10%, 0.25), var(--background))",
                     }}
                 >
                     <div
                         className={cn(
                             "min-h-screen mx-auto max-w-screen-2xl flex flex-col justify-center items-center",
-                            "before:lg:absolute before:inset-y-0 before:left-40 before:w-px before:h-full before:bg-muted/60", // Left grid line
-                            "after:lg:absolute after:inset-y-0 after:right-40 after:w-px after:h-full after:bg-muted/60" // Right grid line
+                            "before:lg:absolute before:inset-y-0 before:left-40 before:w-px before:h-full before:bg-grid-line", // Left grid line
+                            "after:lg:absolute after:inset-y-0 after:right-40 after:w-px after:h-full after:bg-grid-line" // Right grid line
                         )}
                     >
                         {children}
                     </div>
-                    <Toolbar />
+                    {/* <Toolbar /> */}
                 </div>
             </AppProviders>
         </body>
