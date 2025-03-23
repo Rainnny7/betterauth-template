@@ -54,8 +54,8 @@ const RootLayout = ({
                     <div
                         className={cn(
                             "min-h-screen mx-auto max-w-screen-2xl flex flex-col justify-center items-center",
-                            "before:lg:absolute before:inset-y-0 before:left-28 before:w-px before:h-full before:bg-muted/60", // Left grid line
-                            "after:lg:absolute after:inset-y-0 after:right-28 after:w-px after:h-full after:bg-muted/60" // Right grid line
+                            "before:lg:absolute before:inset-y-0 before:left-40 before:w-px before:h-full before:bg-muted/60", // Left grid line
+                            "after:lg:absolute after:inset-y-0 after:right-40 after:w-px after:h-full after:bg-muted/60" // Right grid line
                         )}
                     >
                         {children}
