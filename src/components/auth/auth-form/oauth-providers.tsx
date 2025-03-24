@@ -69,17 +69,19 @@ const OAuthProvider = ({
                 onClick={handleLogin}
                 disabled={loading}
             >
-                {loading ? (
-                    <Loader2 className="size-4 animate-spin" />
-                ) : (
-                    <Image
-                        src={`https://img.clerk.com/static/${provider.id}.svg?width=80`}
-                        alt={provider.name}
-                        width={16}
-                        height={16}
-                        unoptimized
-                    />
-                )}
+                <div>
+                    {loading ? (
+                        <Loader2 className="size-4 animate-spin" />
+                    ) : (
+                        <Image
+                            src={`https://img.clerk.com/static/${provider.id}.svg?width=80`}
+                            alt={provider.name}
+                            width={16}
+                            height={16}
+                            unoptimized
+                        />
+                    )}
+                </div>
                 {showNames && provider.name}
             </Button>
         </SimpleTooltip>
