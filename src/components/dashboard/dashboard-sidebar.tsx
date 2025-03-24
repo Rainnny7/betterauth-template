@@ -7,7 +7,6 @@ import {
     Home,
     Inbox,
     LogOut,
-    Plus,
     Search,
     Settings,
     Sparkles,
@@ -21,7 +20,6 @@ import {
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import {
@@ -31,7 +29,6 @@ import {
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
-    SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
@@ -71,10 +68,6 @@ const DashboardSidebar = (): ReactElement => {
             className="sticky inset-y-0 left-0 max-h-[calc(100vh-3.5rem)] -ml-5 sm:px-1.5 border-r border-dotted border-grid-line transition-all transform-gpu"
             collapsible="none"
         >
-            <SidebarHeader>
-                <TeamSwitcher />
-            </SidebarHeader>
-
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -101,77 +94,6 @@ const DashboardSidebar = (): ReactElement => {
         </Sidebar>
     );
 };
-
-const teams = [
-    {
-        name: "Team 1",
-        logo: Home,
-        plan: "Pro",
-    },
-    {
-        name: "Team 2",
-        logo: Inbox,
-        plan: "Free",
-    },
-];
-
-const TeamSwitcher = (): ReactElement => (
-    <SidebarMenu>
-        <SidebarMenuItem>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <SidebarMenuButton
-                        size="lg"
-                        className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                    >
-                        <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                            <div className="size-4 rounded-full bg-red-500" />
-                        </div>
-                        <div className="grid flex-1 text-left text-sm leading-tight">
-                            <span className="truncate font-semibold">
-                                {teams[0].name}
-                            </span>
-                            <span className="truncate text-xs">
-                                {teams[0].plan}
-                            </span>
-                        </div>
-                        <ChevronsUpDown className="ml-auto" />
-                    </SidebarMenuButton>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                    className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                    align="start"
-                    side="right"
-                    sideOffset={4}
-                >
-                    <DropdownMenuLabel className="text-xs text-muted-foreground">
-                        Teams
-                    </DropdownMenuLabel>
-                    {teams.map((team, index) => (
-                        <DropdownMenuItem key={team.name} className="gap-2 p-2">
-                            <div className="flex size-6 items-center justify-center rounded-sm border">
-                                <team.logo className="size-4 shrink-0" />
-                            </div>
-                            {team.name}
-                            <DropdownMenuShortcut>
-                                ⌘{index + 1}
-                            </DropdownMenuShortcut>
-                        </DropdownMenuItem>
-                    ))}
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="gap-2 p-2">
-                        <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                            <Plus className="size-4" />
-                        </div>
-                        <div className="font-medium text-muted-foreground">
-                            Add team
-                        </div>
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
-        </SidebarMenuItem>
-    </SidebarMenu>
-);
 
 const UserFooter = (): ReactElement => (
     <SidebarMenu>
