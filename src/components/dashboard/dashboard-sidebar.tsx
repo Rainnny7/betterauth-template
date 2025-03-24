@@ -42,7 +42,7 @@ const items = [
 const DashboardSidebar = (): ReactElement => {
     return (
         <Sidebar
-            className="fixed inset-y-0 left-0 translate-x-40 px-2.5 border-r border-dotted border-grid-line"
+            className="fixed inset-y-14 left-0 sm:left-[10%] px-2.5 border-r border-dotted border-grid-line transition-all transform-gpu"
             collapsible="none"
         >
             <SidebarContent>

@@ -13,7 +13,7 @@ const DashboardPage = async (): Promise<ReactElement> => {
         headers: await headers(),
     });
     return (
-        <main className="min-h-screen">
+        <main className="min-h-screen flex flex-col">
             Welcome {session?.user?.name}
             <Button>Bob</Button>
         </main>

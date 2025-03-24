@@ -35,7 +35,9 @@ const DashboardNavbar = (): ReactElement => (
                 height={28}
                 draggable={false}
             />
-            <h1 className="text-lg font-bold">{env.NEXT_PUBLIC_APP_NAME}</h1>
+            <h1 className="hidden xs:block text-lg font-bold">
+                {env.NEXT_PUBLIC_APP_NAME}
+            </h1>
         </Link>
 
         <div className="flex items-center gap-2">
