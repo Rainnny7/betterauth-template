@@ -21,7 +21,7 @@ const links: NavbarLink[] = [
 ];
 
 const DashboardNavbar = (): ReactElement => (
-    <nav className="fixed inset-x-[10%] top-0 px-5 h-14 flex items-center justify-between bg-background border-b sm:border-none border-dotted border-grid-line transition-all transform-gpu z-40">
+    <nav className="fixed inset-x-0 sm:inset-x-[calc(10%+1rem)] top-0 px-5 sm:px-0 h-14 flex items-center justify-between bg-background/80 backdrop-blur-sm border-b sm:border-none border-dotted border-grid-line transition-all transform-gpu z-40">
         {/* Branding */}
         <Link
             className="flex items-center gap-4 hover:opacity-75 transition-opacity transform-gpu"
