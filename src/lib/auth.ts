@@ -3,7 +3,6 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { username } from "better-auth/plugins";
 import { db } from "~/lib/database";
 import { env } from "~/lib/env";
-
 import * as schema from "./database/schemas/auth-schema";
 
 export type ExtendedBetterAuthOptions = BetterAuthOptions & {
@@ -21,10 +20,22 @@ export const auth = betterAuth({
         },
         usePlural: true,
     }),
+    account: {
+        accountLinking: {
+            enabled: true,
+            trustedProviders: ["github", "discord"],
+        },
+    },
     emailAndPassword: {
         enabled: true,
     },
     socialProviders: {
+        github: {
+            id: "github",
+            name: "Github",
+            clientId: env.GITHUB_CLIENT_ID,
+            clientSecret: env.GITHUB_CLIENT_SECRET,
+        },
         discord: {
             id: "discord",
             name: "Discord",
