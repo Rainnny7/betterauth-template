@@ -11,14 +11,6 @@ const DashboardPage = async (): Promise<ReactElement> => {
     const session = await auth.api.getSession({
         headers: await headers(),
     });
-    return (
-        <main className="min-h-screen">
-            Welcome {session?.user?.name}
-            {/* <div className="h-96" />
-            <div className="h-96" />
-            <div className="h-96" />
-            <div className="h-96" /> */}
-        </main>
-    );
+    return <main className="min-h-screen">Welcome {session?.user?.name}</main>;
 };
 export default DashboardPage;

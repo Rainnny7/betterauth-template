@@ -42,15 +42,13 @@ const RootLayout = ({
             <AppProviders>
                 <div
                     className={cn(
-                        "px-5",
+                        "relative px-5 min-h-screen",
                         "before:hidden sm:before:block before:absolute before:inset-x-0 before:top-14 before:w-full before:h-px before:border-t before:border-dotted before:border-grid-line", // Top grid line
-                        "after:hidden sm:after:block after:absolute after:inset-x-0 after:bottom-0 after:w-full after:h-px after:border-t after:border-dotted after:border-grid-line" // Bottom grid line
+                        "after:hidden sm:after:block after:absolute after:inset-x-0 after:bottom-14 after:w-full after:h-px after:border-t after:border-dotted after:border-grid-line" // Bottom grid line
                     )}
                     style={{
                         background:
-                            "linear-gradient(to top, hsla(240, 6%, 10%, 0.1), var(--background))",
-                        minHeight: "100vh",
-                        position: "relative",
+                            "linear-gradient(to top, hsla(240, 6%, 10%, 0.25), var(--background))",
                     }}
                 >
                     <div
