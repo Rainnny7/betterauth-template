@@ -21,11 +21,12 @@ const links: NavbarLink[] = [
 ];
 
 const DashboardNavbar = (): ReactElement => (
-    <nav className="absolute inset-x-[10%] top-0 h-14 px-5 flex items-center justify-between">
+    <nav className="fixed inset-x-[10%] top-0 px-5 h-14 flex items-center justify-between bg-background border-b sm:border-none border-dotted border-grid-line transition-all transform-gpu z-40">
         {/* Branding */}
         <Link
             className="flex items-center gap-4 hover:opacity-75 transition-opacity transform-gpu"
             href={auth.options.authRedirect ?? "/"}
+            draggable={false}
         >
             <Image
                 src="/logo.png"
@@ -46,6 +47,7 @@ const DashboardNavbar = (): ReactElement => (
                         target={
                             !link.href.startsWith("/") ? "_blank" : undefined
                         }
+                        draggable={false}
                     >
                         <link.icon className="size-5" />
                     </Link>

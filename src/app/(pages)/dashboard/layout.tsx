@@ -1,7 +1,6 @@
 import { ReactElement, ReactNode } from "react";
 import DashboardNavbar from "~/components/dashboard/dashboard-navbar";
-import Toolbar from "~/components/toolbar";
-import { SidebarProvider } from "~/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
 
 const DashboardLayout = ({
     children,
@@ -9,11 +8,10 @@ const DashboardLayout = ({
     children: ReactNode;
 }): ReactElement => (
     <SidebarProvider>
-        {/* <DashboardSidebar /> */}
-        <main className="w-full min-h-screen">
+        <main className="px-[10%] pt-14 w-full min-h-screen flex">
             <DashboardNavbar />
-            {children}
-            <Toolbar />
+            {/* <DashboardSidebar /> */}
+            <SidebarInset className="bg-transparent">{children}</SidebarInset>
         </main>
     </SidebarProvider>
 );
