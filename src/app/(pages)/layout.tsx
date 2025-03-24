@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ReactNode } from "react";
+import Footer from "~/components/footer";
 import { env, isProd } from "~/lib/env";
 import { cn } from "~/lib/utils";
 import AppProviders from "~/providers/app-providers";
@@ -50,7 +51,7 @@ const RootLayout = ({
                     )}
                     style={{
                         background:
-                            "linear-gradient(to top, hsla(240, 6%, 10%, 0.25), var(--background))",
+                            "linear-gradient(to top, hsla(240, 6%, 10%, 0.35), var(--background))",
                     }}
                 >
                     <div
@@ -62,6 +63,7 @@ const RootLayout = ({
                     >
                         {children}
                     </div>
+                    <Footer />
                 </div>
             </AppProviders>
         </body>
