@@ -5,10 +5,7 @@ import {
     Bell,
     ChevronsUpDown,
     CreditCard,
-    Home,
     LogOut,
-    LucideIcon,
-    Paperclip,
     Sparkles,
 } from "lucide-react";
 import { ReactElement } from "react";
@@ -23,79 +20,11 @@ import {
     DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarFooter,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
 } from "~/components/ui/sidebar";
 import { authClient } from "~/lib/auth-client";
-
-type SidebarItem = {
-    title: string;
-    url: string;
-    icon: LucideIcon;
-};
-
-const items: SidebarItem[] = [
-    {
-        title: "Home",
-        url: "/dashboard",
-        icon: Home,
-    },
-    {
-        title: "Something",
-        url: "/dashboard/something",
-        icon: Paperclip,
-    },
-    {
-        title: "Something",
-        url: "/dashboard/something",
-        icon: Paperclip,
-    },
-    {
-        title: "Something",
-        url: "/dashboard/something",
-        icon: Paperclip,
-    },
-];
-
-const DashboardSidebar = (): ReactElement => {
-    return (
-        <Sidebar
-            className="sticky inset-y-0 left-0 max-h-[calc(100vh-3.5rem)] -ml-5 sm:px-1.5 border-r border-dotted border-grid-line transition-all transform-gpu"
-            collapsible="none"
-        >
-            <SidebarContent>
-                <SidebarGroup>
-                    <SidebarGroupLabel>Overview</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            {items.map((item: SidebarItem, index: number) => (
-                                <SidebarMenuItem key={index}>
-                                    <SidebarMenuButton asChild>
-                                        <a href={item.url}>
-                                            <item.icon />
-                                            <span>{item.title}</span>
-                                        </a>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-            </SidebarContent>
-
-            <SidebarFooter>
-                <UserFooter />
-            </SidebarFooter>
-        </Sidebar>
-    );
-};
 
 const UserFooter = (): ReactElement | undefined => {
     const { data: session } = authClient.useSession();
@@ -186,5 +115,4 @@ const UserFooter = (): ReactElement | undefined => {
         </SidebarMenu>
     );
 };
-
-export default DashboardSidebar;
+export default UserFooter;
