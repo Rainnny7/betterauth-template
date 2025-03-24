@@ -18,7 +18,7 @@ const DashboardLayout = ({
         >
             <DashboardNavbar />
             <DashboardSidebar />
-            <SidebarInset className="ml-[var(--sidebar-width)] bg-transparent">
+            <SidebarInset className="pl-5 bg-transparent">
                 {children}
             </SidebarInset>
         </main>
