@@ -1,0 +1,57 @@
+import { Github, LucideIcon } from "lucide-react";
+import { Link } from "next-view-transitions";
+import Image from "next/image";
+import { ReactElement } from "react";
+import SimpleTooltip from "~/components/simple-tooltip";
+import { auth } from "~/lib/auth";
+import { env } from "~/lib/env";
+
+type NavbarLink = {
+    label: string;
+    href: string;
+    icon: LucideIcon;
+};
+
+const links: NavbarLink[] = [
+    {
+        label: "Our GitHub",
+        href: "https://github.com/Rainnny7/betterauth-template",
+        icon: Github,
+    },
+];
+
+const DashboardNavbar = (): ReactElement => (
+    <nav className="absolute inset-x-[10%] top-0 h-14 px-5 flex items-center justify-between">
+        {/* Branding */}
+        <Link
+            className="flex items-center gap-4 hover:opacity-75 transition-opacity transform-gpu"
+            href={auth.options.authRedirect ?? "/"}
+        >
+            <Image
+                src="/logo.png"
+                alt="BetterAuth Logo"
+                width={28}
+                height={28}
+                draggable={false}
+            />
+            <h1 className="text-lg font-bold">{env.NEXT_PUBLIC_APP_NAME}</h1>
+        </Link>
+
+        <div className="flex items-center gap-2">
+            {links.map((link: NavbarLink) => (
+                <SimpleTooltip key={link.label} content={`View ${link.label}`}>
+                    <Link
+                        className="hover:opacity-75 transition-opacity transform-gpu"
+                        href={link.href}
+                        target={
+                            !link.href.startsWith("/") ? "_blank" : undefined
+                        }
+                    >
+                        <link.icon className="size-5" />
+                    </Link>
+                </SimpleTooltip>
+            ))}
+        </div>
+    </nav>
+);
+export default DashboardNavbar;

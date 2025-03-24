@@ -10,6 +10,9 @@ This template serves as a simple base with a basic dashboard, as well as premade
 Wanna see a live preview? See it [here](https://ba-demo.rainnny.club)!
 ![Live Preview](https://preview.fascinated.cc/?url=https://ba-demo.rainnny.club)
 
+## How to Use
+Not done
+
 ## Stack
 -   TypeScript
 -   NextJS

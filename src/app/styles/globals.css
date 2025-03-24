@@ -101,7 +101,7 @@
     --destructive: hsl(0 100% 67%);
     --destructive-foreground: hsl(0 0% 98%);
     --border: oklch(0.274 0.006 286.033);
-    --grid-line: oklch(27.4% 0.006 286.033 / 60%);
+    --grid-line: oklch(27.4% 0.006 286.033 / 90%);
     --input: oklch(1 0 0 / 15%);
     --ring: hsl(221.2 83.2% 53.3%);
     --chart-1: oklch(0.488 0.243 264.376);
