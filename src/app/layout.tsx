@@ -5,7 +5,7 @@ import Footer from "~/components/footer";
 import { env, isProd } from "~/lib/env";
 import { cn } from "~/lib/utils";
 import AppProviders from "~/providers/app-providers";
-import "../styles/globals.css";
+import "./styles/globals.css";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
