@@ -1,20 +1,17 @@
 import { Metadata } from "next";
-import { headers } from "next/headers";
 import { ReactElement } from "react";
 import { Button } from "~/components/ui/button";
-import { auth } from "~/lib/auth";
+import { getCurrentUser } from "~/lib/auth";
 
 export const metadata: Metadata = {
     title: "Dashboard",
 };
 
 const DashboardPage = async (): Promise<ReactElement> => {
-    const session = await auth.api.getSession({
-        headers: await headers(),
-    });
+    const { user } = await getCurrentUser();
     return (
         <main className="min-h-screen flex flex-col">
-            Welcome {session?.user?.name}
+            Welcome {user?.name}
             <Button>Bob</Button>
         </main>
     );

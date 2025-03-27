@@ -1,0 +1,55 @@
+{
+    "$schema": "https://ui.shadcn.com/schema/registry.json",
+    "name": "BetterAuth-Template",
+    "homepage": "https://github.com/Rainnny7/betterauth-template",
+    "items": [
+        {
+            "name": "logged-in",
+            "type": "registry:block",
+            "title": "Logged In",
+            "description": "A simple component that only renders its children if the user is logged in.",
+            "files": [
+                {
+                    "path": "registry/new-york/logged-in.tsx",
+                    "type": "registry:component"
+                }
+            ]
+        },
+        {
+            "name": "logged-out",
+            "type": "registry:block",
+            "title": "Logged Out",
+            "description": "A simple component that only renders its children if the user is logged out.",
+            "files": [
+                {
+                    "path": "registry/new-york/logged-out.tsx",
+                    "type": "registry:component"
+                }
+            ]
+        },
+        {
+            "name": "user-avatar",
+            "type": "registry:block",
+            "title": "User Avatar",
+            "description": "A simple component that displays the user's avatar.",
+            "files": [
+                {
+                    "path": "registry/new-york/user-avatar.tsx",
+                    "type": "registry:component"
+                }
+            ]
+        },
+        {
+            "name": "auth-form",
+            "type": "registry:block",
+            "title": "Auth Form",
+            "description": "A simple auth form component that supports logging in, registering, resetting passwords, and two-factor auth.",
+            "files": [
+                {
+                    "path": "registry/new-york/auth-form.tsx",
+                    "type": "registry:component"
+                }
+            ]
+        }
+    ]
+}

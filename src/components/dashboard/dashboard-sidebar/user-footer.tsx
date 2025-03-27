@@ -1,15 +1,9 @@
 "use client";
 
-import {
-    BadgeCheck,
-    Bell,
-    ChevronsUpDown,
-    CreditCard,
-    LogOut,
-    Sparkles,
-} from "lucide-react";
+import { ChevronsUpDown, LogOut, Settings } from "lucide-react";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { useRouter } from "next/navigation";
 import { ReactElement } from "react";
-import { Avatar, AvatarFallback } from "~/components/ui/avatar";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -25,10 +19,15 @@ import {
     SidebarMenuItem,
 } from "~/components/ui/sidebar";
 import { authClient } from "~/lib/auth-client";
+import { User } from "~/types/auth";
+import UserAvatar from "../../../../registry/new-york/user-avatar";
 
-const UserFooter = (): ReactElement | undefined => {
-    const { data: session } = authClient.useSession();
-    if (!session) return undefined;
+const UserFooter = ({ user }: { user: User }): ReactElement => {
+    const router: AppRouterInstance = useRouter();
+    const logout = async (): Promise<void> => {
+        await authClient.signOut();
+        router.refresh();
+    };
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -38,20 +37,7 @@ const UserFooter = (): ReactElement | undefined => {
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                             size="lg"
                         >
-                            <Avatar className="h-8 w-8 rounded-lg">
-                                {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
-                                <AvatarFallback className="rounded-lg">
-                                    CN
-                                </AvatarFallback>
-                            </Avatar>
-                            <div className="grid flex-1 text-left text-sm leading-tight">
-                                <span className="truncate font-semibold">
-                                    {session.user.name}
-                                </span>
-                                <span className="truncate text-xs">
-                                    {session.user.email}
-                                </span>
-                            </div>
+                            <UserDetails user={user} />
                             <ChevronsUpDown className="ml-auto size-4" />
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
@@ -62,50 +48,20 @@ const UserFooter = (): ReactElement | undefined => {
                         sideOffset={4}
                     >
                         <DropdownMenuLabel className="p-0 font-normal">
-                            <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                <Avatar className="h-8 w-8 rounded-lg">
-                                    {/* <AvatarImage
-                                src={user.avatar}
-                                alt={user.name}
-                            /> */}
-                                    <AvatarFallback className="rounded-lg">
-                                        CN
-                                    </AvatarFallback>
-                                </Avatar>
-                                <div className="grid flex-1 text-left text-sm leading-tight">
-                                    <span className="truncate font-semibold">
-                                        John
-                                    </span>
-                                    <span className="truncate text-xs">
-                                        john@doe.com
-                                    </span>
-                                </div>
-                            </div>
+                            <UserDetails user={user} />
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
-                                <Sparkles />
-                                Upgrade to Pro
+                                <Settings />
+                                Settings
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                <BadgeCheck />
-                                Account
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <CreditCard />
-                                Billing
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Bell />
-                                Notifications
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem
+                            className="text-destructive/90 focus:text-destructive"
+                            onClick={logout}
+                        >
                             <LogOut />
                             Log out
                         </DropdownMenuItem>
@@ -115,4 +71,16 @@ const UserFooter = (): ReactElement | undefined => {
         </SidebarMenu>
     );
 };
+
+const UserDetails = ({ user }: { user: User }): ReactElement => (
+    <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+        <UserAvatar user={user} size="sm" />
+        <div className="grid flex-1 text-left text-sm leading-tight">
+            <span className="truncate font-semibold">{user.name}</span>
+            <span className="truncate text-xs text-muted-foreground">
+                {user.username ? `@${user.username}` : user.email}
+            </span>
+        </div>
+    </div>
+);
 export default UserFooter;

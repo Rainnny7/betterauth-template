@@ -1,9 +1,12 @@
 import { betterAuth, BetterAuthOptions } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { username } from "better-auth/plugins";
+import { headers } from "next/headers";
 import { db } from "~/lib/database";
 import { env } from "~/lib/env";
+import { GetCurrentUserResponse, Session, User } from "~/types/auth";
 import * as schema from "./database/schemas/auth-schema";
+import { forbidden } from "next/navigation";
 
 export type ExtendedBetterAuthOptions = BetterAuthOptions & {
     authRedirect?: string;
@@ -70,4 +73,15 @@ export const toClientAuthOptions = (authOptions: BetterAuthOptions) => {
 
     removeSecrets(options);
     return options;
+};
+
+export const getCurrentUser = async (): Promise<GetCurrentUserResponse> => {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    if (!session) forbidden();
+    return {
+        session: session.session as Session,
+        user: session.user as User,
+    };
 };

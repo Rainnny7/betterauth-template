@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "logged-in",
+  "type": "registry:block",
+  "title": "Logged In",
+  "description": "A simple component that only renders its children if the user is logged in.",
+  "files": [
+    {
+      "path": "registry/new-york/logged-in.tsx",
+      "content": "\"use client\";\r\n\r\nimport { ReactElement, ReactNode } from \"react\";\r\nimport { authClient } from \"~/lib/auth-client\";\r\nimport { User } from \"~/types/auth\";\r\n\r\ntype LoggedInProps = {\r\n    /**\r\n     * The optional user to render the component for.\r\n     */\r\n    user?: User | undefined;\r\n\r\n    /**\r\n     * The children to render when the user is logged in.\r\n     */\r\n    children: ReactNode;\r\n};\r\n\r\n/**\r\n * A component that renders its children only if the user is logged in.\r\n *\r\n * @param user the optional user to render the component for.\r\n * @param children the children to render when the user is logged in.\r\n * @returns the children or undefined if the user is not logged in.\r\n */\r\nconst LoggedIn = ({ user: initialUser, children }: LoggedInProps): ReactElement | undefined => {\r\n    const session = initialUser ? undefined : authClient.useSession();\r\n    if (!session && !initialUser) return undefined;\r\n    const user = session?.data?.user ?? initialUser;\r\n    if (!user) return undefined;\r\n    return <>{children}</>;\r\n};\r\nexport default LoggedIn;\r\n",
+      "type": "registry:component"
+    }
+  ]
+}

@@ -19,7 +19,3 @@ Not done
 -   TailwindCSS
 -   BetterAuth
 -   Drizzle
-
-## Roadmap/Ideas
--   [ ] A CLI to scaffold a project with auth?
--   [ ] A react lib with the components already in it?

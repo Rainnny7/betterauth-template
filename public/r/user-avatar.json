@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "user-avatar",
+  "type": "registry:block",
+  "title": "User Avatar",
+  "description": "A simple component that displays the user's avatar.",
+  "files": [
+    {
+      "path": "registry/new-york/user-avatar.tsx",
+      "content": "\"use client\";\r\n\r\nimport { cva, VariantProps } from \"class-variance-authority\";\r\nimport { ReactElement } from \"react\";\r\nimport { Avatar, AvatarFallback, AvatarImage } from \"~/components/ui/avatar\";\r\nimport { authClient, getInitials } from \"~/lib/auth-client\";\r\nimport { cn } from \"~/lib/utils\";\r\nimport { User } from \"~/types/auth\";\r\n\r\nconst avatarVariants = cva(undefined, {\r\n    variants: {\r\n        size: {\r\n            \"2xl\": \"size-16\",\r\n            xl: \"size-12\",\r\n            default: \"size-10\",\r\n            sm: \"size-8\",\r\n            xs: \"size-4\",\r\n        },\r\n    },\r\n    defaultVariants: {\r\n        size: \"default\",\r\n    },\r\n});\r\n\r\ntype UserAvatarProps = VariantProps<typeof avatarVariants> & {\r\n    /**\r\n     * The optional user to display the avatar for.\r\n     */\r\n    user?: User;\r\n\r\n    /**\r\n     * The optional class name for the avatar.\r\n     */\r\n    className?: string;\r\n};\r\n\r\nconst UserAvatar = ({\r\n    user: initialUser,\r\n    size,\r\n    className,\r\n}: UserAvatarProps): ReactElement | undefined => {\r\n    const session = initialUser ? undefined : authClient.useSession();\r\n    if (!session?.data && !initialUser) return undefined;\r\n    const user = session?.data?.user ?? initialUser;\r\n    if (!user) return undefined;\r\n    return (\r\n        <Avatar className={cn(avatarVariants({ size, className }))}>\r\n            <AvatarImage src={user.image ?? undefined} />\r\n            <AvatarFallback>\r\n                {getInitials(user.username ?? user.name)}\r\n            </AvatarFallback>\r\n        </Avatar>\r\n    );\r\n};\r\nexport default UserAvatar;\r\n",
+      "type": "registry:component"
+    }
+  ]
+}
